@@ -14,14 +14,18 @@
 			height: 200%;
 		}
 		
+		#i_debug {
+			position: fixed;
+			top: 16px;
+			left: 16px;
+		}
+		
 		/* Title and Subtitle */
 		.c_title {
 			position: absolute;
-			top: 40%;
+			top: 35%;
 			left: 50%;
 			transform: translate(-50%, 0);
-			
-			line-height: 50%;
 		}
 		
 		.c_back {
@@ -67,10 +71,30 @@
 			opacity: 0;
 			height: 128px;
 		}
+		
+		/* S 1 */
+		
+		.c_s1_text {
+			margin-top: 64px;
+			
+			color: #BBB;
+			
+			text-align: center;
+			
+			line-height: 200%;
+		}
+		
+		#i_offers {
+			transition: all 1s;
+			
+			list-style: none;
+		}
 	</style>
 </head>
 
 <body>
+	<p id="i_debug"></p>
+	
 	<!-- Title -->
 	<div class="c_title">
 		<p id="i_title">Hi! I'm Gurpreet.</p>
@@ -85,11 +109,31 @@
 	
 	<!-- Screen 1 -->
 	<div class="c_back" id="c_s1">
-		
+		<div class="c_s1_text">
+			I've been making games for years, and plan to keep doing it for the years to come.
+			<br><br>
+			<font size="6">What do I offer?</font>
+			<br><br>
+			<list id="i_offers">
+				<li> GML Programming </li>
+				<li> Pixel Art </li>
+				<br>
+				<i><li> for... </li></i>
+				<li> PC </li>
+				<li> Android </li>
+				<li> HTML5/Web </li>
+				<li> Facebook Instant Games </li>
+			</list>
+		</div>
 	</div>
 </body>
 
 <script>
+	//Debug
+	let i_debug = document.getElementById("i_debug");
+	let body = document.getElementsByTagName("BODY")[0];
+	i_debug.innerHTML = body.scrollTop;
+	
 	//Text properties
 	const title_delay = 200;
 	const subtitle_delay = 300;
@@ -126,7 +170,7 @@
 	}, title_delay);
 	
 	//Subtitle
-	let subtitle_text = "Game Maker & Instructor";
+	let subtitle_text = "2D Game Developer & Instructor";
 	let i_subtitle = document.getElementById("i_subtitle");
 	let subtitle_char = 0;
 	
