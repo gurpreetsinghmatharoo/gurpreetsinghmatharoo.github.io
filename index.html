@@ -12,6 +12,8 @@
 		body {
 			font-family: Helvetica, Arial, sans-serif;
 			height: 200%;
+			
+			background-color: #EEEEEE;
 		}
 		
 		#i_debug {
@@ -49,17 +51,17 @@
 		}
 		
 		#i_subtitle {
+			transition: all 1s;
+			
 			padding-top: 0px;
 			
 			font-size: 22px;
 			text-align: center;
 			color: gray;
+			opacity: 0;
 		}
 		
 		/* Down Arrow */
-		.c_middle {
-		}
-		
 		#i_down_arrow {
 			transition: all 1.5s;
 			
@@ -89,6 +91,34 @@
 			
 			list-style: none;
 		}
+		
+		/* Sidebar */
+		.c_sidebar {
+			width: 312px;
+			height: 100%;
+			
+			transition: all 0.7s;
+			position: fixed;
+			
+			left: -312px;
+			margin-top: -8px;
+		}
+		
+		#i_sidebar_back {
+			width: 312px;
+			height: 100%;
+			
+			margin-top: -68px;
+			
+			background-color: #333;
+		}
+		
+		#i_sidebar_btn {
+			margin-top: 16px;
+			margin-left: 328px;
+			
+			height: 48px;
+		}
 	</style>
 </head>
 
@@ -96,14 +126,14 @@
 	<p id="i_debug"></p>
 	
 	<!-- Title -->
-	<div class="c_title">
+	<div class="c_title" id="i_s0">
 		<p id="i_title">Hi! I'm Gurpreet.</p>
 		<p id="i_subtitle">Game Maker & Instructor</p>
 	</div>
 	
 	<!-- Down Arrow -->
 	<div class="c_middle">
-		<img src="down.png" id="i_down_arrow">
+		<img src="img/down.png" id="i_down_arrow">
 		</img>
 	</div>
 	
@@ -115,8 +145,8 @@
 			<font size="6">What do I offer?</font>
 			<br><br>
 			<list id="i_offers">
-				<li> GML Programming </li>
-				<li> Pixel Art </li>
+				<a href="#"><li> GML Programming </li></a>
+				<a href="#"><li> Pixel Art </li></a>
 				<br>
 				<i><li> for... </li></i>
 				<li> PC </li>
@@ -126,19 +156,29 @@
 			</list>
 		</div>
 	</div>
+	
+	<!-- Sidebar -->
+	<div class="c_sidebar" id="i_sidebar">
+		<img src="img/menu.png" id="i_sidebar_btn"></img>
+		
+		<div id="i_sidebar_back">
+			
+		</div>
+	</div>
 </body>
 
 <script>
 	//Debug
 	let i_debug = document.getElementById("i_debug");
-	let body = document.getElementsByTagName("BODY")[0];
-	i_debug.innerHTML = body.scrollTop;
+	let body = document.getElementById("i_s0");
+	i_debug.innerHTML = ''//body.scrollTop;
 	
 	//Text properties
 	const title_delay = 200;
 	const subtitle_delay = 300;
-	const title_ms = 100;
-	const subtitle_ms = 60;
+	const title_ms = 60;
+	const subtitle_ms = 400;
+	const arrow_delay = 1200;
 	
 	const immediate = 0;
 	
@@ -177,26 +217,31 @@
 	i_subtitle.innerHTML = "";
 	
 	let subtitle_func = function() {
-		subtitle_char += 1;
+		subtitle_char = subtitle_text.length;
 		i_subtitle.innerHTML = subtitle_text.substr(0, subtitle_char);
+		i_subtitle.style.opacity = 1;
 		
-		if (subtitle_char < subtitle_text.length) {
-			setTimeout( function() {
-				subtitle_func();
-			}, subtitle_ms);
-		}
-		else {
+		setTimeout( function() {
 			let i_down_arrow = document.getElementById("i_down_arrow");
 			
 			i_down_arrow.style.top = "85%";
 			i_down_arrow.style.opacity = "1";
-		}
+		}, arrow_delay);
 	}
 	
 	//Immediate mode
 	if (immediate) {
 		title_char = title_text.length;
 		subtitle_char = subtitle_text.length;
+	}
+	
+	//Sidebar
+	let i_sidebar_btn = document.getElementById("i_sidebar_btn");
+	let i_sidebar = document.getElementById("i_sidebar");
+	
+	i_sidebar_btn.onclick = function() {
+		if (i_sidebar.style.left != "0px") i_sidebar.style.left = "0px";
+		else i_sidebar.style.left = "-312px";
 	}
 </script>
 
