@@ -15,7 +15,7 @@
     
     --clickable-color: #626468;
     --clicked-color: #eae5b4;
-    --hover-color: #727578
+    --hover-color: #727578;
 }
 
 body {
@@ -260,8 +260,34 @@ div#showcase {
     }
 
     .img_content {
-        width: 320px;
+        width: 30%;
         float: right;
+    }
+
+    .sh_content_text {
+        color: #eaeaea;
+        width: 68%;
+    }
+
+    .sh_content_text b {
+        font-size: 18px;
+    }
+
+    .sh_content_button {
+        width: 160px;
+        height: 48px;
+
+        background-color: var(--clickable-color);
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+
+        color: #dedede;
+        font-size: 18px;
     }
 
 div.spoiler {
