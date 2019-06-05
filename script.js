@@ -13,8 +13,31 @@ if (canvas.getContext) {
     //ctx.fillStyle = "rgb(1, 0.8, 0.5, 1)";
     //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Input
+    var iLeft = 0, iRight = 0, iUp = 0, iDown = 0;
+
+    // Down
+    document.addEventListener('keydown', function(event) {
+        if (event.key == 'a') {
+            iLeft = true;
+        }
+        else if (event.key == 'd') {
+            iRight = true;
+        }
+    });
+
+    // Up
+    document.addEventListener('keyup', function(event) {
+        if (event.key == 'a') {
+            iLeft = false;
+        }
+        else if (event.key == 'd') {
+            iRight = false;
+        }
+    });
+
     // Public
-    let frameRate = 30;
+    let frameRate = 60;
 
     // Room
     let room = {
@@ -36,11 +59,13 @@ if (canvas.getContext) {
 
         move (xadd, yadd) {
             // Collision
-            if (collision(xadd, 0)) {
+            if (this.collision(xadd, 0)) {
                 xadd = 0;
+                console.log("Collision found on x")
             }
-            if (collision(0, yadd)) {
+            if (this.collision(0, yadd)) {
                 yadd = 0;
+                console.log("Collision found on y")
             }
 
             // Move
@@ -60,12 +85,12 @@ if (canvas.getContext) {
         }
 
         update () {
-            this.bbox_left = x;
-            this.bbox_top = y;
-            this.bbox_right = x + width;
-            this.bbox_bottom = y + height;
-            this.bbox_x = x + width/2;
-            this.bbox_y = y + height/2;
+            this.bbox_left = this.x;
+            this.bbox_top = this.y;
+            this.bbox_right = this.x + this.width;
+            this.bbox_bottom = this.y + this.height;
+            this.bbox_x = this.x + this.width/2;
+            this.bbox_y = this.y + this.height/2;
         }
 
         draw () {
@@ -75,14 +100,20 @@ if (canvas.getContext) {
     }
 
     // Player
-    let player = new Obj(32, 64, 32, 32);
+    let player = new Obj (32, 64, 32, 32);
     player.gravity = 0;
+    player.moveSpeed = 4;
 
     // Step
     let Step = () => {
         // Player gravity
         player.gravity += 0.08;
         player.move(0, player.gravity);
+
+        // Move
+        let axis_x = iRight - iLeft;
+        let axis_y = iDown - iUp;
+        player.move(axis_x * player.moveSpeed, 0);
     }
 
     setInterval(Step, 1000/frameRate);
