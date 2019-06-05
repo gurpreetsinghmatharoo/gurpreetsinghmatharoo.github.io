@@ -24,6 +24,9 @@ if (canvas.getContext) {
         else if (event.key == 'd') {
             iRight = true;
         }
+        else if (event.key == 'w') {
+            iUp = true;
+        }
     });
 
     // Up
@@ -33,6 +36,9 @@ if (canvas.getContext) {
         }
         else if (event.key == 'd') {
             iRight = false;
+        }
+        else if (event.key == 'w') {
+            iUp = false;
         }
     });
 
@@ -114,6 +120,9 @@ if (canvas.getContext) {
         let axis_x = iRight - iLeft;
         let axis_y = iDown - iUp;
         player.move(axis_x * player.moveSpeed, 0);
+
+        // Jump
+
     }
 
     setInterval(Step, 1000/frameRate);
