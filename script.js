@@ -16,48 +16,86 @@ if (canvas.getContext) {
     // Public
     let frameRate = 30;
 
-    // Create
-    let Create = () => {
-        // Object class
-        class Obj {
-            constructor (x, y, width, height) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-            }
+    // Room
+    let room = {
+        width : canvas.width,
+        height : canvas.height
+    }
 
-            move (xadd, yadd) {
-                this.x += xadd;
-                this.y += yadd;
-            }
+    // Object class
+    class Obj {
+        constructor (x, y, width, height) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
 
-            outOfBounds () {
-                return this.bbox_left < 0 || this.bbox_top < 0 || this.bbox_right >= 
-            }
-
-            update () {
-                this.bbox_left = x;
-                this.bbox_top = y;
-                this.bbox_right = x + width;
-                this.bbox_bottom = y + height;
-                this.bbox_x = x + width/2;
-                this.bbox_y = y + height/2;
-            }
+            // Default values
+            this.color = "rgba(255, 255, 255, 1)"
         }
 
-        // Player
-        let player = new Obj(32, 64);
-        player.gravity = 0;
+        move (xadd, yadd) {
+            // Collision
+            if (collision(xadd, 0)) {
+                xadd = 0;
+            }
+            if (collision(0, yadd)) {
+                yadd = 0;
+            }
+
+            // Move
+            this.x += xadd;
+            this.y += yadd;
+
+            // Update
+            this.update();
+        }
+
+        outOfBounds (xadd, yadd) {
+            return (this.bbox_left + xadd) < 0 || (this.bbox_top + yadd) < 0 || (this.bbox_right + xadd) >= room.width || (this.bbox_bottom + yadd) >= room.height;
+        }
+
+        collision (xadd, yadd) {
+            return this.outOfBounds(xadd, yadd);
+        }
+
+        update () {
+            this.bbox_left = x;
+            this.bbox_top = y;
+            this.bbox_right = x + width;
+            this.bbox_bottom = y + height;
+            this.bbox_x = x + width/2;
+            this.bbox_y = y + height/2;
+        }
+
+        draw () {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
     }
+
+    // Player
+    let player = new Obj(32, 64, 32, 32);
+    player.gravity = 0;
 
     // Step
     let Step = () => {
         // Player gravity
-
+        player.gravity += 0.08;
+        player.move(0, player.gravity);
     }
 
     setInterval(Step, 1000/frameRate);
+
+    // Draw
+    let Draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw player
+        player.draw();
+    }
+
+    setInterval(Draw, 1000/frameRate);
 }
 
 
