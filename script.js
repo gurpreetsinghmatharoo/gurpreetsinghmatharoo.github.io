@@ -66,10 +66,20 @@ if (canvas.getContext) {
         move (xadd, yadd) {
             // Collision
             if (this.collision(xadd, 0)) {
+                while (!this.collision(Math.sign(xadd), 0)) {
+                    this.x += Math.sign(xadd);
+                    this.update();
+                }
+
                 xadd = 0;
                 console.log("Collision found on x")
             }
             if (this.collision(0, yadd)) {
+                while (!this.collision(0, Math.sign(yadd))) {
+                    this.y += Math.sign(yadd);
+                    this.update();
+                }
+
                 yadd = 0;
                 console.log("Collision found on y")
             }
@@ -82,6 +92,7 @@ if (canvas.getContext) {
             this.update();
         }
 
+        // Check
         outOfBounds (xadd, yadd) {
             return (this.bbox_left + xadd) < 0 || (this.bbox_top + yadd) < 0 || (this.bbox_right + xadd) >= room.width || (this.bbox_bottom + yadd) >= room.height;
         }
@@ -90,6 +101,11 @@ if (canvas.getContext) {
             return this.outOfBounds(xadd, yadd);
         }
 
+        grounded () {
+            return this.collision(0, 1);
+        }
+
+        // Functions
         update () {
             this.bbox_left = this.x;
             this.bbox_top = this.y;
@@ -109,11 +125,12 @@ if (canvas.getContext) {
     let player = new Obj (32, 64, 32, 32);
     player.gravity = 0;
     player.moveSpeed = 4;
+    player.jumpSpeed = 6;
 
     // Step
     let Step = () => {
         // Player gravity
-        player.gravity += 0.08;
+        player.gravity += 0.3;
         player.move(0, player.gravity);
 
         // Move
@@ -122,7 +139,10 @@ if (canvas.getContext) {
         player.move(axis_x * player.moveSpeed, 0);
 
         // Jump
-
+        if (player.grounded() && iUp) {
+            player.gravity = -player.jumpSpeed;
+            player.move(0, player.gravity);
+        }
     }
 
     setInterval(Step, 1000/frameRate);
