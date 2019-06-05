@@ -247,7 +247,7 @@ div#showcase {
         height: 0px;
         padding: 20px 20px;
         
-        background-color: #333745;
+        background-color: var(--section-color);
         color: white;
     }
     
@@ -273,21 +273,37 @@ div#showcase {
         font-size: 18px;
     }
 
+    .sh_content_button_container {
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+
     .sh_content_button {
+        transition: all 0.5s;
         width: 160px;
-        height: 48px;
+        height: auto;
 
         background-color: var(--clickable-color);
         border-radius: 8px;
 
         display: flex;
-        align-items: center;
         justify-content: center;
+        margin: 12px auto;
 
         border: none;
 
         color: #dedede;
         font-size: 18px;
+        text-align: center;
+        padding: 12px 0px;
+
+        text-decoration: initial;
+    }
+
+    .sh_content_button:hover {
+        cursor: pointer;
+        background-color: var(--hover-color);
+        color: white;
     }
 
 div.spoiler {
