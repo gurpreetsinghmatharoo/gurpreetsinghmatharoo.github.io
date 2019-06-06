@@ -56,7 +56,7 @@ div#main {
     height: 256px;
     
     padding-top: 140px;
-    padding-bottom: 0px;
+    padding-bottom: 80px;
 }
     
     div#image_cn {
@@ -158,31 +158,23 @@ div#content {
 div#highlights {
     background-color: var(--section-color);
     height: 320px;
+
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
-    
-    .hl_title {
-        transition: all 0.5s;
-        position: absolute;
-        left: 16px;
-        top: 8px;
-        opacity: 1;
-        
-        color: white;
-        text-shadow: 0px 1px 2px var(--shadow-color);
-        
-        font-size: 21px;
-        
-        white-space: nowrap;
-    }
     
     .hl_item {
         transition: all 0.5s;
-        width: 320px;
+        width: 360px;
         position: relative;
+        margin: 0px;
         
         box-shadow: 0px 2px 2px var(--shadow-color);
         
         cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
     }
     
     .hl_item:hover {
@@ -201,6 +193,21 @@ div#highlights {
         transition: all 0.5s;
         opacity: 1;
         font-size: 21px;
+    }
+    
+    .hl_title {
+        transition: all 0.5s;
+        position: absolute;
+        left: 16px;
+        top: 8px;
+        opacity: 1;
+        
+        color: white;
+        text-shadow: 0px 1px 2px var(--shadow-color);
+        
+        font-size: 21px;
+        
+        white-space: nowrap;
     }
     
     .hl_preview {
@@ -345,7 +352,7 @@ div.spoiler:hover {
 div.spoiler.active {
     background-color: var(--clicked-color);
     transition: all 0.5s;
-    max-height: 500px;
+    max-height: 800px;
     
     padding-bottom: 0px;
     
