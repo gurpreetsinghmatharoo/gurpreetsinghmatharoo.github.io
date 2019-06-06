@@ -63,7 +63,8 @@ if (canvas.getContext) {
             this.color = "rgba(255, 255, 255, 1)"
 
             // Sprite
-            this._spriteIndex = "";
+            this._spriteLoaded = false;
+            this._spriteIndex = 0;
             this._imageIndex = 0;
             this._imageNumber = 0;
             this._imageSpeed = 1;
@@ -78,7 +79,14 @@ if (canvas.getContext) {
 
         // Set
         setSprite (name, frames, fps) {
-            this._spriteIndex = "sprites/" + name + ".png";
+            this._spriteLoaded = false;
+            this._spriteIndex = new Image();
+
+            this._spriteIndex.onload = () => {
+                this._spriteLoaded = true;
+            }
+
+            this._spriteIndex.src = "sprites/" + name + ".png";
             this._imageNumber = frames;
             this._imageSpeed = fps / frameRate;
         }
@@ -142,10 +150,11 @@ if (canvas.getContext) {
 
         draw () {
             // Draw rect
-            if (!this._spriteIndex) {
+            if (!this._spriteLoaded) {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             }
+            // Draw sprite
             else {
 
             }
