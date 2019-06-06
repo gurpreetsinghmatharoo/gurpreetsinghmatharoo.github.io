@@ -63,9 +63,14 @@ if (canvas.getContext) {
             this.color = "rgba(255, 255, 255, 1)"
 
             // Sprite
-            _spriteIndex = "";
-            _imageIndex = 0;
-            _imageNumber = 0;
+            this._spriteIndex = "";
+            this._imageIndex = 0;
+            this._imageNumber = 0;
+            this._imageSpeed = 1;
+
+            // Scale
+            this._imageXScale = 1;
+            this._imageYScale = 1;
         }
 
         move (xadd, yadd) {
@@ -98,9 +103,15 @@ if (canvas.getContext) {
         }
 
         // Set
-        set spriteIndex (file, frames) {
+        setSprite (file, frames, fps) {
             this._spriteIndex = file;
             this._imageNumber = frames;
+            this._imageSpeed = fps / frameRate;
+        }
+
+        setScale (xscale, yscale) {
+            this._imageXScale = xscale;
+            this._imageYScale = yscale;
         }
 
         // Movement / Collisions
@@ -133,7 +144,7 @@ if (canvas.getContext) {
     }
 
     // Player
-    let player = new Obj (32, 64, 64, 64);
+    let player = new Obj (32, 64, 32, 32);
     player.gravity = 0;
     player.moveSpeed = 4;
     player.jumpSpeed = 10;
