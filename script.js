@@ -68,11 +68,27 @@ if (canvas.getContext) {
             this._imageNumber = 0;
             this._imageSpeed = 1;
 
+            this._spriteWidth = 0;
+            this._spriteHeight = 0;
+
             // Scale
             this._imageXScale = 1;
             this._imageYScale = 1;
         }
 
+        // Set
+        setSprite (name, frames, fps) {
+            this._spriteIndex = "sprites/" + name + ".png";
+            this._imageNumber = frames;
+            this._imageSpeed = fps / frameRate;
+        }
+
+        setScale (xscale, yscale) {
+            this._imageXScale = xscale;
+            this._imageYScale = yscale;
+        }
+
+        // Movement / Collisions
         move (xadd, yadd) {
             // Collision
             if (this.collision(xadd, 0)) {
@@ -102,19 +118,6 @@ if (canvas.getContext) {
             this.update();
         }
 
-        // Set
-        setSprite (file, frames, fps) {
-            this._spriteIndex = file;
-            this._imageNumber = frames;
-            this._imageSpeed = fps / frameRate;
-        }
-
-        setScale (xscale, yscale) {
-            this._imageXScale = xscale;
-            this._imageYScale = yscale;
-        }
-
-        // Movement / Collisions
         outOfBounds (xadd, yadd) {
             return (this.bbox_left + xadd) < 0 || (this.bbox_top + yadd) < 0 || (this.bbox_right + xadd) >= room.width || (this.bbox_bottom + yadd) >= room.height;
         }
@@ -138,8 +141,14 @@ if (canvas.getContext) {
         }
 
         draw () {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            // Draw rect
+            if (!this._spriteIndex) {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+            else {
+
+            }
         }
     }
 
@@ -148,6 +157,8 @@ if (canvas.getContext) {
     player.gravity = 0;
     player.moveSpeed = 4;
     player.jumpSpeed = 10;
+
+    player.setSprite("matharoo_idle", 2, 15);
 
     // Step
     let Step = () => {
@@ -183,7 +194,7 @@ if (canvas.getContext) {
 // Showcase
 let ids = document.getElementsByClassName("sh_preview");
 
-for (let i=0; i<ids.length; i++) {
+for (var i=0; i<ids.length; i++) {
     let id = ids[i];
     
     id.addEventListener("click", function() {
@@ -209,7 +220,7 @@ for (let i=0; i<ids.length; i++) {
 let sh_ids = ids;
 ids = document.getElementsByClassName("hl_item");
 
-for (let i=0; i<ids.length; i++) {
+for (var i=0; i<ids.length; i++) {
     let id = ids[i];
     
     // Set corresponding showcase preview
