@@ -59,8 +59,13 @@ if (canvas.getContext) {
             this.width = width;
             this.height = height;
 
-            // Default values
+            // Color
             this.color = "rgba(255, 255, 255, 1)"
+
+            // Sprite
+            _spriteIndex = "";
+            _imageIndex = 0;
+            _imageNumber = 0;
         }
 
         move (xadd, yadd) {
@@ -92,7 +97,13 @@ if (canvas.getContext) {
             this.update();
         }
 
-        // Check
+        // Set
+        set spriteIndex (file, frames) {
+            this._spriteIndex = file;
+            this._imageNumber = frames;
+        }
+
+        // Movement / Collisions
         outOfBounds (xadd, yadd) {
             return (this.bbox_left + xadd) < 0 || (this.bbox_top + yadd) < 0 || (this.bbox_right + xadd) >= room.width || (this.bbox_bottom + yadd) >= room.height;
         }
@@ -105,7 +116,7 @@ if (canvas.getContext) {
             return this.collision(0, 1);
         }
 
-        // Functions
+        // Step Functions
         update () {
             this.bbox_left = this.x;
             this.bbox_top = this.y;
@@ -122,15 +133,15 @@ if (canvas.getContext) {
     }
 
     // Player
-    let player = new Obj (32, 64, 32, 32);
+    let player = new Obj (32, 64, 64, 64);
     player.gravity = 0;
     player.moveSpeed = 4;
-    player.jumpSpeed = 6;
+    player.jumpSpeed = 10;
 
     // Step
     let Step = () => {
         // Player gravity
-        player.gravity += 0.3;
+        player.gravity += 0.8;
         player.move(0, player.gravity);
 
         // Move
@@ -141,7 +152,6 @@ if (canvas.getContext) {
         // Jump
         if (player.grounded() && iUp) {
             player.gravity = -player.jumpSpeed;
-            player.move(0, player.gravity);
         }
     }
 
