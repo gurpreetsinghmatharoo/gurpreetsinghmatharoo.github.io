@@ -31,6 +31,18 @@ body {
     color: white;
 }
 
+#discord {
+    transition: all 0.5s;
+    position: fixed;
+    left: 16px;
+    top: 93%;
+    z-index: 50;
+}
+
+#discord:hover {
+    top: 48.5%;
+}
+
 #funcanvas {
     opacity: 1px;
 }
