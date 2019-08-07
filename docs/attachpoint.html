@@ -58,11 +58,33 @@
             <div id="content">
                 <h1>Overview</h1>
                 <br><br>
-                Attach Point Tool helps you set up attach points on sprite sheets. It exports code that you can put in your project and retrieve in-game.
+                <p>Attach Point Tool helps you set up attach points on sprite sheets. It exports code that you can put in your project and retrieve in-game.
+                </p>
                 <br><br>
                 <b>Workflow</b>
                 <br><br>
-                
+                <ol type="1">
+                    <li>Import sprite sheet(s)</li>
+                    <li>Set up attach points and their angles</li>
+                    <li>Export code</li>
+                </ol>
+                <br><br>
+                <b>Exported Code</b>
+                <br><br>
+                <p>The exported code will export a nested array structure, in this format:
+                </p>
+                <br><br>
+                <code>Sprite : [
+                    Frame0 : [x, y, angle],
+                    Frame1 : [x, y, angle],
+                    Frame3 : [x, y, angle],
+                    // More frames...
+                ]
+
+                // More sprites (if more than one imported)
+                </code>
+                <br><br>
+                <p>The coordinates are relative to the top-left corner of each frame.</p>
             </div>
         </main>
     </body>
