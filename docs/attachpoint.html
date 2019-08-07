@@ -45,6 +45,7 @@
             }
 
             #purchase {
+                transition: all 0.5s;
                 width: 150px;
                 height: 48px;
                 background-color:rgb(112, 197, 100);
@@ -56,11 +57,20 @@
                 top: 120px;
 
                 transform: translateX(-50%);
+
+                font-weight: bold;
+                color: #202329;
+                font-size: 16px;
             }
 
             #purchase:hover {
-                
                 cursor: pointer;
+                
+                background-color:rgb(205, 240, 125);
+            }
+
+            #purchase:active {
+                background-color:rgb(43, 122, 105);
             }
 
             #content {
