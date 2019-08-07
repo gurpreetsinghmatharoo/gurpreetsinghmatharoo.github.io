@@ -14,7 +14,7 @@
 
             main {
                 width: 100%;
-                height: 100%;
+                height: auto;
                 background-color: #202223;
                 border-radius: 16px;
                 box-shadow: 0px 8px 12px rgb(12, 12, 14);
@@ -41,6 +41,20 @@
                 position: relative;
                 top: 30%;
             }
+
+            #content {
+                padding: 32px;
+            }
+
+            b {
+                font-style: italic;
+            }
+
+            pre {
+                padding: 24px;
+                background-color: #101114;
+                border-radius: 8px;
+            }
         </style>
     </head>
 
@@ -57,33 +71,35 @@
 
             <div id="content">
                 <h1>Overview</h1>
-                <br><br>
                 <p>Attach Point Tool helps you set up attach points on sprite sheets. It exports code that you can put in your project and retrieve in-game.
                 </p>
-                <br><br>
+                <br>
                 <b>Workflow</b>
-                <br><br>
+                <br>
                 <ol type="1">
+                    <li>Set frame count</li>
                     <li>Import sprite sheet(s)</li>
                     <li>Set up attach points and their angles</li>
                     <li>Export code</li>
                 </ol>
-                <br><br>
+                <br>
+                <p>When you export, it asks you the name of the state/sprite, which is used for the array's name.
+                <br>The attach points for that state/sprite are saved to disk, so you can later load them by using the "Load Points" button and entering the name.
+                </p>
+                <br>
                 <b>Exported Code</b>
-                <br><br>
+                <br>
                 <p>The exported code will export a nested array structure, in this format:
                 </p>
-                <br><br>
-                <code>Sprite : [
-                    Frame0 : [x, y, angle],
-                    Frame1 : [x, y, angle],
-                    Frame3 : [x, y, angle],
-                    // More frames...
-                ]
-
-                // More sprites (if more than one imported)
-                </code>
-                <br><br>
+<pre>Sprite : [<br>
+    Frame0 : [x, y, angle],<br>
+    Frame1 : [x, y, angle],<br>
+    Frame2 : [x, y, angle],<br>
+    // More frames...<br>
+]<br>
+<br>
+// More sprites (if more than one imported)
+</pre>
                 <p>The coordinates are relative to the top-left corner of each frame.</p>
             </div>
         </main>
