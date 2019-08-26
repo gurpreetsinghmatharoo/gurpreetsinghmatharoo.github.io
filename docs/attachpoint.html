@@ -94,9 +94,11 @@
                 <div id="subtitle">
                     by Matharoo
                 </div>
-                <button id="purchase">
-                    Purchase
-                </button>
+                <a href="https://matharoo.itch.io/attachpoint" target="_blank">
+                    <button id="purchase">
+                        Purchase
+                    </button>
+                </a>
             </div>
 
             <div id="content">
@@ -107,14 +109,13 @@
                 <b>Workflow</b>
                 <br>
                 <ol type="1">
-                    <li>Set frame count</li>
                     <li>Import sprite sheet(s)</li>
                     <li>Set up attach points and their angles</li>
                     <li>Export code</li>
                 </ol>
                 <br>
                 <p>When you export, it asks you the name of the state/sprite, which is used for the array's name.
-                <br>The attach points for that state/sprite are saved to disk, so you can later load them by using the "Load Points" button and entering the name.
+                <br>The attach points for that state/sprite are also saved to disk, so you can later load them by using the "Load Points" button and entering the name.
                 </p>
                 <br>
                 <b>Exported Code</b>
@@ -130,13 +131,24 @@
 <br>
 // More sprites (if more than one imported)
 </pre>
-                <p>The coordinates are relative to the top-left corner of each frame.</p>
+                <p>By default, the coordinates are relative to the top-left corner of each frame.</p>
+                <br>
+                <h1>Features</h1>
+                <ul>
+                    <li>Load multiple sprites, each having their own frames</li>
+                    <li>You can load multiple, directional animation sheets, and set the angles to be relative to the direction</li>
+                    <li>You can change the origin to either top-left or middle-center</li>
+                    <li>Inverted crosshair for placing attach points, for easier visiblity</li>
+                    <li>Preview your attach points by loading a preview sprite</li>
+                </ul>
                 <br>
                 <h1>Input</h1>
                 <p><b>Mouse wheel:</b> Zoom
-                <br><br><b>Middle click:</b> Pan
+                    <br><br><b>Middle-click:</b> Focus
+                <br><br><b>Middle-click drag:</b> Pan
                 <br><br><b>Left mouse button:</b> Modify attach point position
                 <br><br><b>Right mouse button:</b> Modify attach point angle
+                <br><br><b>Arrow keys: </b> Navigate frames
                 </p>
             </div>
         </main>
