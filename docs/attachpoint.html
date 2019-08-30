@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Attach Point Tool: Documentation</title>
+        <title>AttachPoint: Documentation</title>
 
         <style>
             @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
@@ -22,7 +22,7 @@
 
             #header {
                 width: 100%;
-                height: 300px;
+                height: 360px;
                 display: block;
 
                 background: url("attachpoint/header.png");
@@ -41,7 +41,11 @@
                 text-align: center;
 
                 position: relative;
-                top: 60px;
+                top: 30px;
+            }
+            
+            #titleimg {
+                height: 140px;
             }
 
             #purchase {
@@ -54,7 +58,7 @@
 
                 position: relative;
                 left: 50%;
-                top: 120px;
+                top: 94px;
 
                 transform: translateX(-50%);
 
@@ -73,6 +77,12 @@
                 background-color:rgb(43, 122, 105);
             }
 
+            #videos {
+                padding: 32px;
+                display:flex;
+                overflow:hidden;
+            }
+
             #content {
                 padding: 32px;
             }
@@ -89,7 +99,7 @@
         <main>
             <div id="header">
                 <div id="title">
-                    Attach Point Tool
+                    <img src="attachpoint/attachpoint_logo.png" id="titleimg">
                 </div>
                 <div id="subtitle">
                     by Matharoo
@@ -99,6 +109,11 @@
                         Purchase
                     </button>
                 </a>
+            </div>
+
+            <div id="videos">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kuKfV4MbiKE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dobd7vW1K00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
             <div id="content">
@@ -122,14 +137,17 @@
                 <br>
                 <p>The Export Code button will export a nested array structure, in this format:
                 </p>
-<pre>Sprite : [<br>
-    Frame0 : [x, y, angle],<br>
-    Frame1 : [x, y, angle],<br>
-    Frame2 : [x, y, angle],<br>
-    // More frames...<br>
+<pre>[
+    Sprite : [<br>
+        Frame0 : [x, y, angle],<br>
+        Frame1 : [x, y, angle],<br>
+        Frame2 : [x, y, angle],<br>
+        // More frames...<br>
+    ]<br>
+    // More sprites (if more than one imported)<br>
 ]<br>
 <br>
-// More sprites (if more than one imported)
+
 </pre>
                 <p>By default, the coordinates are relative to the middle-center point of each frame.</p>
                 <br>
@@ -156,7 +174,8 @@
                 <b>What kinds of sprite sheets does it support?</b></li>
                 <br>
                 <p>At this point, it only supports horizontal sprite sheets for animation.
-                <br>Loading multiple sprites will treat them as separate sprites, not an animation.
+                <br>Loading frames as separate images will treat them as separate sprites, not an animation.
+                <br>However, you can still make that work.
                 </p>
                 <br>
                 <h1>Credits</h1>
