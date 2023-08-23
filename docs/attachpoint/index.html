@@ -1,0 +1,358 @@
+<html>
+    <head>
+        <title>AttachPoint: Documentation</title>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                padding: 64px 20%;
+                background-color: #101114;
+                color: white;
+                font-family: "Open Sans";
+            }
+
+            main {
+                width: 100%;
+                height: auto;
+                background-color: #202329;
+                border-radius: 16px;
+                box-shadow: 0px 8px 12px rgb(12, 12, 14);
+            }
+
+            #header {
+                width: 100%;
+                height: 360px;
+                display: block;
+
+                background: url("header.png");
+
+                border-radius: 16px 16px 0px 0px;
+            }
+
+            a {
+                color: lightgray;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            a:visited {
+                color: lightgray;
+            }
+
+            a:hover {
+                color: white;
+            }
+
+            a:active {
+                color: gray;
+            }
+
+            #title {
+                font-size: 50px;
+                text-align: center;
+
+                position: relative;
+                top: 50px;
+            }
+
+            #subtitle {
+                font-size: 16px;
+                text-align: center;
+
+                position: relative;
+                top: 30px;
+            }
+            
+            #titleimg {
+                height: 140px;
+            }
+
+            #buttons {
+                width: 200px;
+                margin: auto;
+            }
+
+            #purchase {
+                transition: all 0.5s;
+                width: 240px;
+                height: 60px;
+                background-color:rgb(112, 197, 100);
+                border-radius: 5px;
+                border-width: 0px;
+
+                position: relative;
+                left: 50%;
+                top: 94px;
+
+                transform: translateX(-50%);
+
+                font-weight: bold;
+                color: #202329;
+                font-size: 16px;
+
+                border-radius: 16px;
+
+                margin-bottom: 16px;
+            }
+
+            #purchase:hover {
+                cursor: pointer;
+                
+                background-color:rgb(205, 240, 125);
+            }
+
+            #purchase:active {
+                background-color:rgb(43, 122, 105);
+            }
+
+            #videos {
+                padding: 32px;
+                display:flex;
+                overflow:hidden;
+            }
+
+            #content {
+                padding: 32px;
+            }
+
+            pre {
+                padding: 24px;
+                background-color: #191b20;
+                border-radius: 8px;
+            }
+
+            img {
+                border-radius: 8px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #contents_menu {
+                padding: 16px 32px;
+                padding-top: 10px;
+                border-radius: 10px;
+                background-color: #333941;
+            }
+
+            h1 {
+                padding: 8px;
+                border-radius: 8px;
+                background-color: #4a5961;
+                padding-left: 32px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <div id="header">
+                <div id="title">
+                    <img src="attachpoint_logo.png" id="titleimg">
+                </div>
+                <div id="subtitle">
+                    by Matharoo
+                </div>
+                <div id="buttons">
+                    <a href="https://matharoo.itch.io/attachpoint" target="_blank">
+                        <button id="purchase">
+                            Buy on Itch
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div id="videos">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kuKfV4MbiKE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dobd7vW1K00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div id="content">
+                <h1>Overview</h1>
+                <p>Using AttachPoint, you can create "attach points" on the frames of your sprites. You can then export/copy the code (which will contain the coordinates) and use it in your game to attach an object to another.
+                </p>
+                <br>
+                <b>Workflow</b>
+                <br>
+                <ol type="1">
+                    <li>Import sprite sheet(s)</li>
+                    <li>Set up attach points and their angles</li>
+                    <li>Export code</li>
+                </ol>
+                <p>When you export, it asks you the name of the state/sprite, which is used for the exported array's name.
+                <p>You can restore an export with the 'Restore Export' button.
+                </p>
+
+                <br>
+                <div id="contents_menu">
+                    <h1>Contents</h1>
+                    <ul>
+                        <li><a href="#export">Export Code</a></li>
+                        <li><a href="#controls">Controls</a></li>
+                        <li><a href="#restore">Restore Export</a></li>
+                        <li><a href="#animation">Animation Preview</a></li>
+                        <li><a href="#preview">Preview Image</a></li>
+                        <li><a href="#origin">Origin</a></li>
+                        <li><a href="#relative">Relative Angles</a></li>
+                        <li><a href="#legacy">Legacy Support</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#credits">Credits</a></li>
+                    </ul>
+                </div>
+
+                <br>
+                <h1 id="export">Export Code</h1>
+                <p>The 'Export Code' button will export/copy a nested array structure to your clipboard, in this format:
+                </p>
+<pre>
+// 'State' is the name you enter while exporting<br>
+State = [];<br>
+<br>
+// First sprite<br>
+State[0] : [<br>
+    Frame0 : [x, y, angle],<br>
+    Frame1 : [x, y, angle],<br>
+    Frame2 : [x, y, angle],<br>
+    // More frames...<br>
+];<br>
+<br>
+// Second sprite<br>
+State[1] : [<br>
+    Frame0 : [x, y, angle],<br>
+    Frame1 : [x, y, angle],<br>
+    Frame2 : [x, y, angle],<br>
+    // More frames...<br>
+];<br>
+<br>
+// More sprites...<br>
+</pre>
+                <p>The exported coordinates will be relative to the <a href="#origin">Origin point</a> selected in the program.</p>
+                <br>
+                <h1 id="controls">Controls</h1>
+                <p><b>Mouse wheel:</b> Zoom
+                <br><i>Can use Alt+Mouse for this</i>
+
+                <p><img src="attach_zoom.gif" style="height:160px;"></p>
+
+                <br><br><b>Middle-click drag:</b> Pan
+                <br><i>Can use Shift+Mouse for this</i>
+
+                <p><img src="attach_pan.gif" style="height:160px;"></p>
+
+                <br><br><b>Middle-click:</b> Focus on a frame
+
+                <p><img src="attach_focus.gif" style="height:160px;"></p>
+
+                <br><br><b>Left mouse button:</b> Modify attach point position
+
+                <p><img src="attach_point_move.gif" style="height:160px;"></p>
+
+                <br><br><b>Right mouse button:</b> Modify attach point angle
+                
+                <p><img src="attach_rotate.gif" style="height:160px;"></p>
+                
+                <br><br><b>Arrow keys: </b> Navigate frames
+                
+                <p><img src="attach_navigate.gif" style="height:160px;"></p>
+
+                </p>
+                <br>
+                <h1 id="restore">Restore Export</h1>
+                <p>The 'Restore Export' button will load any previously exported animations.</p>
+                <p>The name that you entered while exporting an animation, will need to be entered in order to load it back.</p>
+
+                <p><img src="restorequestion.jpg" style="height:180px;"></p>
+
+                <p>As you can see, you have the option to either import everything from the export (including all sprites),
+                or just the attach points.
+                </p>
+
+                <p>This means that you can import attach points saved from one sprite, onto another, if you select the second option.</p>
+
+                <br>
+                <h1 id="animation">Animation Preview</h1>
+                
+                <p>You can click on the 'Play Animation' button on a sprite to preview its animation:</p>
+                <p><img src="attach_anim.gif" style="height:220px;"></p>
+
+                <p>You can also change the speed of a sprite animation:</p>
+                <p><img src="attach_anim_fps.gif" style="height:240px;"></p>
+
+                <br>
+                <h1 id="preview">Preview Image</h1>
+                <p><img src="previewbutton.jpg" style="height:80px;"></p>
+
+                <p>By default, a crosshair with an arrow will appear at your attach points:</p>
+                <p><img src="defaultmarker.jpg" style="height:180px;"></p>
+
+                <p>You can import a preview sprite which will appear instead of the default crosshair:</p>
+                <p><img src="previewimage.jpg" style="height:180px;"></p>
+
+                <br>
+                <h1 id="origin">Origin</h1>
+
+                <p>You can set the origin of the base sprite through the origin menu.
+
+                <p><img src="originmenu.jpg" style="height:240px;"></p>
+
+                <p>The exported attach point coordinates will be relative to this origin point,
+                and those coordinates can be seen on each frame at the bottom-left corner, along with the angle:
+
+                <p><img src="xydisplay.jpg" style="height:160px;"></p>
+                <p style="text-align:center; font-size:15px;"><i>This feature is not available in the demo</i></p>
+                <br>
+
+                <p>In most cases, the origin set in AttachPoint will need to match the origin of the sprite in your game project.
+
+                <p>You can select the 'Custom' option to set an origin point manually:</p>
+                <p><img src="customorigin.jpg" style="height:300px;"></p>
+                
+                <br>
+                <br>
+                <h1 id="relative">Relative Angles</h1>
+
+                <p>If you import multiple sprites, where each sprite is the same character, but in a different direction, then you can use the
+                'Relative Angles' feature to automatically set the base angle of each sprite, starting from the right.
+
+                <p><img src="attach_relative_angles.gif" style="height:400px;"></p>
+
+                <p>Note that this is only visual, and does not affect the angles exported for each frame.
+                It is expected that the base angle will be added to the exported angle in your game project.    
+                </p>
+
+                <br>
+                <h1 id="legacy">Legacy Support</h1>
+                <p><img src="legacy.jpg" style="height:76px;"></p>
+
+                <p>GameMaker Studio 1.x does not support array literals, which is why the Legacy Support mode was created.
+
+                <p>Exporting with Legacy Support enabled produces code in a format that works without requiring array literal support.<br>
+                It's been created and tested specifically for GameMaker Studio versions prior to 2.x.</p>
+
+                <br>
+                <h1 id="faq">FAQ</h1>
+                <br>
+                <b>What kinds of sprite sheets does AttachPoint support?</b></li>
+                <br>
+                <p>You need to import an horizontal strip/sheet image for animation.
+                GIFs are not supported.</p>
+                <br>
+                <br>
+                <b>What if my animation frames are separate images, not a sheet?</b>
+                <p>Loading frames as separate images will treat them as separate sprites, not an animation.
+                <br>However, you can still make that work, as they'll be exported as separate arrays with one frame each.
+                <br>But you won't be able to preview the animation inside the program -- you need a horizontal strip image for that.
+                </p>
+                <br>
+                <h1 id="credits">Credits</h1>
+                <p>Thanks to Samuel Venable for his DLLs!
+                </p>
+            </div>
+        </main>
+    </body>
+</html>
